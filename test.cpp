@@ -27,6 +27,14 @@ TEST_CASE("test example, file", "[simple]"){
     REQUIRE(buffer.str() == "7\n");
 }
 
+TEST_CASE("file 015", ""){
+    std::ifstream input( "../015", std::ofstream::in);
+    std::stringstream output;
+    parseFile(input,output);
+    input.close();
+    REQUIRE(output.str() == "333333333333333333\n");
+}
+
 TEST_CASE("test 1", ""){
     std::stringstream input, output;
     input<<"1 2 1 3 10";

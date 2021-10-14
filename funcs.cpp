@@ -5,18 +5,18 @@
 
 /*! @brief First argument, that returns true for given func
  *
- * @tparam Func function pointer, lambda, on given vector should have
+ * @tparam Func function polong longer, lambda, on given vector should have
  * that form: "___---"
- * @param func function pointer, lambda, that should accept int as input
+ * @param func function polong longer, lambda, that should accept long long as input
  * @param left Left limit
  * @param right Right limit
  * @param tol Tolerance
  * @return value
  */
 template<typename Func>
-int indexOfFirst(Func func, int left, int right){
+long long indexOfFirst(Func func, long long left, long long right){
     while (left<right){
-        int middle = (left+right)/2;
+        long long middle = (left+right)/2;
         if(func(middle)){
             right = middle;
         } else {
@@ -27,9 +27,9 @@ int indexOfFirst(Func func, int left, int right){
 }
 
 template<typename Func>
-void findRange(Func func, int & left, int & right){
+void findRange(Func func, long long & left, long long & right){
     bool vLeft, vRight;
-    int steps = 10;
+    long long steps = 10;
     while ((steps-->0)&&
            (vLeft = func(left))==(vRight = func(right))
             ){
@@ -41,14 +41,14 @@ void findRange(Func func, int & left, int & right){
 }
 
 void parseFile(std::istream & input, std::ostream & output){
-    int perf1, rest1, perf2, rest2, trees;
+    long long perf1, rest1, perf2, rest2, trees;
     input>>perf1>> rest1>> perf2>> rest2>> trees;
 
-    int left = trees/(perf1+perf2)-1;
-    int right = 2*trees/(perf1+perf2)+1;
+    long long left = trees/(perf1+perf2)-1;
+    long long right = 2*trees/(perf1+perf2)+1;
 
     auto func=[&rest1, &perf1, &rest2, &perf2, &trees]
-            (int days){
+            (long long days){
         return (days-days/rest1)*perf1 + (days-days/rest2)*perf2 >= trees;
     };
 
@@ -58,7 +58,7 @@ void parseFile(std::istream & input, std::ostream & output){
         return;
     }
 
-    int ans = indexOfFirst(func,left,right);
+    long long ans = indexOfFirst(func,left,right);
 
     output<<ans<<'\n';
 }
